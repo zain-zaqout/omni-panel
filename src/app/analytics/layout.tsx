@@ -4,6 +4,6 @@ export const metadata: Metadata = {
   title: "Insights",
 };
 
-export default function AnalyticeLayout({ children }) {
+export default function AnalyticeLayout({ children }: { children: any }) {
   return <>{children}</>; 
 }

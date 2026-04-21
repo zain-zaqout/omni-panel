@@ -4,6 +4,6 @@ export const metadata: Metadata = {
   title: "My Profile",
 };
 
-export default function ProfileLayout({ children }) {
+export default function ProfileLayout({ children }: { children: any }) {
   return <>{children}</>;
 }

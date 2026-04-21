@@ -4,6 +4,6 @@ export const metadata: Metadata = {
   title: "Orders Management",
 };
 
-export default function OrdersLayout({ children }) {
+export default function OrdersLayout({ children }: { children: any }) {
   return <>{children}</>;
 }
