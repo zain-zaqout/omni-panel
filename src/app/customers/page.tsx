@@ -211,7 +211,7 @@ const CustomerPage = () => {
           </div>
         </section>
         <AnimationWrapper delay={0.4}>
-          <CustomerTable data={filteredCustomer} isLoading={isLoading} delet={deletOrder} />
+          <CustomerTable data={filteredCustomer} isLoading={isLoading} />
         </AnimationWrapper>
       </div>
     </main>
