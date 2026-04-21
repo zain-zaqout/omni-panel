@@ -69,7 +69,7 @@ const AreaChart = () => {
     },
     yaxis: {
       labels: {
-        formatter: (val) => `$${val / 1000}k`,
+        formatter: (val: any) => `$${val / 1000}k`,
         style: { colors: isDarkMode ? "#94A3B8" : "#64748B", fontSize: "12px" },
       },
     },

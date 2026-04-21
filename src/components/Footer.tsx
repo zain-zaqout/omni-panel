@@ -7,13 +7,13 @@ const Footer = () => {
     { 
       id: "github",
       icon: <Github size={18} />, 
-      href: "#", 
+      href: "https://github.com/zain-zaqout", 
       hover: "hover:bg-slate-200 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white hover:border-slate-400 dark:hover:border-white/50",
     },
     { 
       id: "whatsapp",   
       icon: <MessageCircle size={18} />, 
-      href: "#", 
+      href: "tel:+970593906089", 
       hover: "hover:bg-emerald-500/10 hover:text-emerald-500 dark:hover:text-emerald-400 hover:border-emerald-500/50",
     },
     { 

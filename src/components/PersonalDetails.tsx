@@ -13,7 +13,7 @@ const PersonalDetails = () => {
     showActions
   } = useData();
 
-  const inputFocusRef = useRef<HTMLInputElement>(null);
+  const inputFocusRef = useRef(null);
 
   useEffect(() => {
     if (showActions && inputFocusRef.current) {

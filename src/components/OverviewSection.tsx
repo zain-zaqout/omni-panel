@@ -22,8 +22,7 @@ const OverviewSection = () => {
   const { displayName } = useData();
   const sayHello = displayName?.split(" ")[0] || "User";
 
-  const { orders } = useOrders();
-
+  
   const cards = [
     {
       id: 1,
@@ -57,7 +56,7 @@ const OverviewSection = () => {
       value: 1492,
       background: "bg-blue-50 dark:bg-blue-500/10",
       hover:
-        "hover:border-blue-200 dark:hover:border-blue-500/50 hover:shadow-md",
+      "hover:border-blue-200 dark:hover:border-blue-500/50 hover:shadow-md",
       icon: (
         <ShoppingCart className="text-blue-600 dark:text-blue-400" size={20} />
       ),
@@ -71,7 +70,7 @@ const OverviewSection = () => {
       value: 4,
       background: "bg-orange-50 dark:bg-orange-500/10",
       hover:
-        "hover:border-orange-200 dark:hover:border-orange-500/50 hover:shadow-md",
+      "hover:border-orange-200 dark:hover:border-orange-500/50 hover:shadow-md",
       icon: (
         <Percent className="text-orange-600 dark:text-orange-400" size={20} />
       ),
@@ -80,6 +79,8 @@ const OverviewSection = () => {
       unit: "%",
     },
   ];
+  
+  const { orders } = useOrders();
 
   return (
     <main className="bg-slate-50 dark:bg-slate-900 min-h-screen pb-5 ml-0 min-[376px]:ml-15 lg:ml-55 transition-colors duration-300">

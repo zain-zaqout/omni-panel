@@ -10,8 +10,8 @@ const CustomerTable = ({ data, isLoading }) => {
     "from-rose-500/25 to-rose-400/15 text-rose-600 dark:text-rose-200",
   ];
 
-  const getInitials = (name) =>
-    name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
+  const getInitials = (name: any) =>
+    name.split(" ").map((n: any) => n[0]).join("").slice(0, 2).toUpperCase();
 
   const englishDate = new Intl.DateTimeFormat("en-US", {
     month: "short", day: "2-digit", year: "numeric", timeZone: "UTC",

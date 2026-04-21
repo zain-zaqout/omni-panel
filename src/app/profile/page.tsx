@@ -13,12 +13,6 @@ const Page = () => {
   const { displayName, showActions, setShowActions, seteditName, changeData } =
     useData();
 
-  const handel = () => {
-    changeData();
-  };
-
-  
-
   return (
     <div className="bg-slate-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
       <header className="bg-white dark:bg-slate-800 w-full h-[9vh] flex border-b border-slate-200 dark:border-slate-700 shadow-sm transition-colors duration-300">
@@ -103,7 +97,7 @@ const Page = () => {
                     <button
                       type="submit"
                       className="bg-violet-500 hover:bg-violet-600 text-white font-semibold px-8 py-2 rounded-full cursor-pointer transition-all shadow-md shadow-violet-500/20 active:scale-95"
-                      onClick={handel}
+                      onClick={changeData}
                     >
                       Save
                     </button>

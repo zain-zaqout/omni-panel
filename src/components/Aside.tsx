@@ -15,7 +15,6 @@ import { useMenu } from "@/contexts/MenuContext";
 
 const Aside = () => {
   const pathName = usePathname();
-  const { Menu, setMenu } = useMenu();
   if (pathName === "/profile" || pathName === "/login") {
     return null;
   }
@@ -50,11 +49,13 @@ const Aside = () => {
 
   const logOut = () => {
     setTimeout(() => {
-      deleteCookie('auth_token');
-      localStorage.clear()
-      window.location.href = "/login"
+      deleteCookie("auth_token");
+      localStorage.clear();
+      window.location.href = "/login";
     }, 1500);
   };
+
+  const { Menu, setMenu } = useMenu();
 
   return (
     <>

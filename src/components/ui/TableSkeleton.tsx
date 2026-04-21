@@ -3,7 +3,6 @@ import { usePathname } from "next/navigation";
 
 export const TableSkeleton = ({ index }) => {
   const path = usePathname();
-  const isOrdersPage = path === "/orders";
 
   return (
     <tr

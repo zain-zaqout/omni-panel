@@ -45,7 +45,8 @@ const OrdersTable = ({ data }: OrdersTableProps) => {
     setTimeout(() => {
       setisLoading(false)
     }, 1200);
-  },[])
+  }, [])
+  
   const path = usePathname();
   const isOrdersPage = path === "/orders";
   

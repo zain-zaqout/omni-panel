@@ -3,14 +3,9 @@ import { toast } from "sonner";
 import { useProduct, type Product, type ProductDraft } from "@/contexts/EditProductContext";
 import { useEffect, useState } from "react";
 
-type EditProductModelProps = {
-  isOpen: boolean;
-  onClose: () => void;
-};
-
-const EditProductModel = ({ isOpen, onClose }: EditProductModelProps) => {
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+const EditProductModel = ({ isOpen, onClose }) => {
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   const { setProductData, productData, setProducts, products } = useProduct();
   
@@ -22,7 +17,7 @@ const EditProductModel = ({ isOpen, onClose }: EditProductModelProps) => {
 
   if (!isOpen) return null;
   
-  const handel = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handel = (e: any) => {
     const { name, value, type } = e.target;
     const field = name as keyof ProductDraft;
 
@@ -37,7 +32,7 @@ const EditProductModel = ({ isOpen, onClose }: EditProductModelProps) => {
     }));
   };
 
-  const handelImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handelImage = (e: any) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -53,7 +48,7 @@ const EditProductModel = ({ isOpen, onClose }: EditProductModelProps) => {
     }
   };
 
-  const handelSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handelSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const promise = new Promise((resolve) => setTimeout(resolve, 2500));

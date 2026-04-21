@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import "react-medium-image-zoom/dist/styles.css";
 import "./globals.css";
-
 import Aside from "@/components/Aside";
 import Navbar from "@/components/Navbar";
 import { SplashLoader } from "@/components/SplashLoader";
