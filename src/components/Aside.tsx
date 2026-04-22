@@ -15,6 +15,7 @@ import { useMenu } from "@/contexts/MenuContext";
 
 const Aside = () => {
   const pathName = usePathname();
+  const { Menu, setMenu } = useMenu();
   if (pathName === "/profile" || pathName === "/login") {
     return null;
   }
@@ -55,7 +56,6 @@ const Aside = () => {
     }, 1500);
   };
 
-  const { Menu, setMenu } = useMenu();
 
   return (
     <>

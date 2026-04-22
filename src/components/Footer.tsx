@@ -1,5 +1,5 @@
 "use client"
-import { CodeXml, UserRound, MessageCircle, BriefcaseBusiness } from 'lucide-react';
+import { MessageCircle, BriefcaseBusiness } from 'lucide-react';
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 
