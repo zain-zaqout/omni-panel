@@ -1,12 +1,13 @@
 "use client"
-import { Github, Linkedin, MessageCircle, BriefcaseBusiness } from "lucide-react";
+import { CodeXml, UserRound, MessageCircle, BriefcaseBusiness } from 'lucide-react';
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 
 const Footer = () => {
   const socialLinks = [
     { 
       id: "github",
-      icon: <Github size={18} />, 
+      icon: <FaGithub size={19} />, 
       href: "https://github.com/zain-zaqout", 
       hover: "hover:bg-slate-200 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white hover:border-slate-400 dark:hover:border-white/50",
     },
@@ -18,7 +19,7 @@ const Footer = () => {
     },
     { 
       id: "linkedin",
-      icon: <Linkedin size={18} />, 
+      icon: <FaLinkedin size={18} />, 
       href: "#", 
       hover: "hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-500/50",
     },
@@ -51,7 +52,7 @@ const Footer = () => {
             Designed & built by <span className="text-violet-600 dark:text-violet-600">Zain</span> | 2026
           </p>
         </div>
-        <div className="flex items-center gap-1 sm:gap-2">
+        <div className="flex items-center gap-2 sm:gap-1">
           {socialLinks.map((link) => (
             <a
               key={link.id}

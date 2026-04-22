@@ -43,24 +43,28 @@ An e-commerce admin dashboard built with Next.js (App Router), featuring modern 
 - `/login` تسجيل الدخول
 
 **Tech Stack**
-- `Next.js 15` + `React 18`
+- `Next.js 15.2.9` + `React 19.0.0`
 - `TypeScript`
-- `Tailwind CSS`
-- `@tanstack/react-table`
-- `ApexCharts` + `react-apexcharts`
-- `framer-motion`
-- `next-themes`
-- `sonner` for toasts
+- `Tailwind CSS 4`
+- `@tanstack/react-table 8.21.2`
+- `ApexCharts 4.0.0` + `react-apexcharts 1.7.0`
+- `framer-motion 11.11.17`
+- `next-themes 0.4.3`
+- `lucide-react`
+- `react-icons 5.6.0`
+- `sonner 1.7.0` for toasts
 
 **التقنيات المستخدمة**
-- `Next.js 15` + `React 18`
+- `Next.js 15.2.9` + `React 19.0.0`
 - `TypeScript`
-- `Tailwind CSS`
-- `@tanstack/react-table`
-- `ApexCharts` + `react-apexcharts`
-- `framer-motion`
-- `next-themes`
-- `sonner` للتنبيهات
+- `Tailwind CSS 4`
+- `@tanstack/react-table 8.21.2`
+- `ApexCharts 4.0.0` + `react-apexcharts 1.7.0`
+- `framer-motion 11.11.17`
+- `next-themes 0.4.3`
+- `lucide-react`
+- `react-icons 5.6.0`
+- `sonner 1.7.0` للتنبيهات
 
 **Run Locally**
 ```bash
