@@ -1,5 +1,7 @@
 # Admin Dashboard (Omni Panel)
 
+[عرض حي للمشروع (Live Demo)](https://omni-panel-alpha.vercel.app/products)
+
 An e-commerce admin dashboard built with Next.js (App Router), featuring modern UI, charts, and data tables for products, orders, and customers.
 
 لوحة تحكم لإدارة متجر إلكتروني مبنية بـ Next.js (App Router) مع واجهة حديثة، رسوم بيانية، وجداول بيانات لإدارة المنتجات والطلبات والعملاء.
