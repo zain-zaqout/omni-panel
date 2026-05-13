@@ -32,7 +32,7 @@ const Navbar = () => {
   const getTitle = () => {
     if (pathName === "/") return "Overview";
     const title = pathName.split("/")[1];
-    return title.charAt(0).toUpperCase() + title.slice(1);
+    return title.charAt(0).toUpperCase() + title.slice();
   };
 
   return (
