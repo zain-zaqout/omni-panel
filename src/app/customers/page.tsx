@@ -4,7 +4,6 @@ import { AnimationWrapper } from "@/components/AnimationWrapper";
 import CustomerCards from "@/components/CustomerCards";
 import CustomerTable from "@/components/CustomerTable";
 import { useEffect, useState } from "react";
-import { toast } from "sonner";
 
 type CustomerStatus = "VIP" | "Active" | "New" | "Inactive";
 
@@ -126,21 +125,21 @@ const CustomerPage = () => {
     return matchesSearch && stock_customer[stockFilter];
   });
 
-  const deletOrder = (id: string) => {
-    const filter = customer.filter((i) => i.id !== id);
+  // const deletOrder = (id) => {
+  //   const filter = customer.filter((i) => i.id !== id);
     
-    const promise = new Promise((resolve) => setTimeout(resolve, 2500));
+  //   const promise = new Promise((resolve) => setTimeout(resolve, 2500));
 
-  toast.promise(promise, {
-    loading: 'Loading',
-    success: () => {
-      setCustomer(filter)
-      localStorage.setItem("customer", JSON.stringify(filter))
-      return `Success In Add Product`;
-    },
-    error: 'عذراً، حدث خطأ أثناء التحديث',
-    });
-  }
+  // toast.promise(promise, {
+  //   loading: 'Loading',
+  //   success: () => {
+  //     setCustomer(filter)
+  //     localStorage.setItem("customer", JSON.stringify(filter))
+  //     return `Success In Add Product`;
+  //   },
+  //   error: 'عذراً، حدث خطأ أثناء التحديث',
+  //   });
+  // }
 
   return (
     <main className="bg-slate-50 dark:bg-slate-900 min-h-screen ml-0 min-[376px]:ml-15 lg:ml-55 transition-colors duration-300">

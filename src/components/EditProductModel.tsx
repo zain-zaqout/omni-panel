@@ -1,14 +1,33 @@
+"use client";
+import { useEffect, useState } from "react";
 import { UploadCloud, X } from "lucide-react";
 import { toast } from "sonner";
-import { useProduct, type Product, type ProductDraft } from "@/contexts/EditProductContext";
-import { useEffect, useState } from "react";
+import { useProduct } from "@/contexts/EditProductContext";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import { useAuth } from "@/contexts/AuthContext";
 
 const EditProductModel = ({ isOpen, onClose }) => {
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
   const { setProductData, productData, setProducts, products } = useProduct();
+  const { currentUser } = useAuth();
   
+  // تأثير لتعطيل السكرول في الخلفية عندما يكون الموديل مفتوحاً
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    // تنظيف التأثير عند عمل unmount للمكون لضمان عدم تعليق السكرول
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
   useEffect(() => {
     if (productData?.image) {
       setImagePreview(productData.image);
@@ -17,88 +36,131 @@ const EditProductModel = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
   
-  const handel = (e: any) => {
+  const handle = (e) => {
     const { name, value, type } = e.target;
-    const field = name as keyof ProductDraft;
 
     if (value === "") {
-      setProductData((prev) => ({ ...prev, [field]: "" }));
+      setProductData((prev) => ({ ...prev, [name]: "" }));
       return;
     }
 
     setProductData((prev) => ({
       ...prev,
-      [field]: type === "number" ? Number(value) : value,
+      [name]: type === "number" ? Number(value) : value,
     }));
   };
 
-  const handelImage = (e: any) => {
+  const handleImage = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const newImageURL = URL.createObjectURL(file);
-    if (file) {
-      setImageFile(file);
-      setImagePreview(newImageURL);
-
-      setProductData((prev) => ({
-        ...prev,
-        image: newImageURL,
-      }));
-    }
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
   };
 
-  const handelSubmit = (e: React.FormEvent) => {
+  const uploadToImgBB = async (file) => {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    const apiKey = "64b38851a39d1412ca74f19205722e5f"; 
+    
+    const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const errRes = await response.json().catch(() => ({}));
+      throw new Error(errRes.error?.message || "ImgBB upload failed.");
+    }
+
+    const result = await response.json();
+    const uploadedUrl = result.data?.url || result.data?.display_url;
+    
+    if (!uploadedUrl) {
+      throw new Error("Invalid response structure from ImgBB.");
+    }
+
+    return uploadedUrl;
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const promise = new Promise((resolve) => setTimeout(resolve, 2500));
+    const updateCloudAndFirestore = async () => {
+      try {
+        if (!currentUser?.uid) throw new Error("User is not authenticated.");
 
-    toast.promise(promise, {
-      loading: "Loading",
-      success: () => {
-        const updateProducts = products.map((item: Product) => {
+        let finalImageUrl = productData.image;
+
+        if (imageFile) {
+          finalImageUrl = await uploadToImgBB(imageFile); 
+        }
+
+        if (!finalImageUrl || finalImageUrl.startsWith("blob:")) {
+          throw new Error("Failed to secure a permanent image URL. Try uploading the image again.");
+        }
+
+        const normalizedStock = productData.stock === "" ? 0 : Number(productData.stock);
+        const normalizedPrice = productData.price === "" ? 0 : Number(productData.price);
+
+        const calculatedStatus =
+          normalizedStock <= 20 && normalizedStock > 0
+            ? "Low Stock"
+            : normalizedStock > 20
+              ? "In Stock"
+              : "Out of Stock";
+
+        const updatedProducts = products.map((item) => {
           if (productData.id === item.id) {
             return {
               ...item,
               ...productData,
-              price:
-                productData.price === ""
-                  ? item.price
-                  : Number(productData.price),
-              stock:
-                productData.stock === ""
-                  ? item.stock
-                  : Number(productData.stock),
-              status:
-                productData.status === "" ? item.status : productData.status,
-              category: productData.category || item.category,
-              image: productData.image || item.image,
+              image: finalImageUrl,
+              price: normalizedPrice,
+              stock: normalizedStock,
+              status: calculatedStatus,
+              category: productData.category || item.category || "General",
             };
           }
           return item;
         });
-        setProducts(updateProducts);
-        localStorage.setItem("products", JSON.stringify(updateProducts));
-        return `Success In Add Product`;
-      },
-      error: "عذراً، حدث خطأ أثناء التحديث",
-    });
 
-    setProductData({
-      id: "",
-      name: "",
-      sku: "",
-      image: "",
-      category: "",
-      status: "In Stock",
-      price: 0,
-      stock: 1,
-    });
-    setImageFile(null);
-    setImagePreview(null);
+        const userDocRef = doc(db, "users", currentUser.uid);
+        await updateDoc(userDocRef, { productsUser: updatedProducts });
 
-    onClose();
+        setProducts(updatedProducts);
+
+        setTimeout(() => {
+          setProductData({
+            id: "",
+            name: "",
+            sku: "",
+            image: "",
+            category: "",
+            status: "In Stock",
+            price: 0,
+            stock: 1,
+          });
+          setImageFile(null);
+          setImagePreview(null);
+          onClose();
+        }, 100);
+
+        return "Product updated successfully!";
+      } catch (error) {
+        console.error("Submission flow failed:", error.message);
+        throw new Error(error.message);
+      }
+    };
+
+    toast.promise(updateCloudAndFirestore(), {
+      loading: "Securing storage and updating product...",
+      success: (msg) => msg,
+      error: (err) => err.message,
+    });
   };
+
   return (
     <div className="fixed inset-0 z-50 flex justify-end">
       <div
@@ -106,14 +168,14 @@ const EditProductModel = ({ isOpen, onClose }) => {
         onClick={onClose}
       />
       <div className="relative w-full max-w-md bg-white dark:bg-slate-900 shadow-2xl flex flex-col h-full right-0 animate-[slideIn_0.3s_ease-out] border-l border-slate-200 dark:border-slate-800 transition-colors">
-        <form onSubmit={handelSubmit}>
+        <form onSubmit={handleSubmit} className="flex flex-col h-full">
           <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-6 py-5 bg-white dark:bg-slate-900 transition-colors">
             <div>
               <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
                 Edit Product
               </h2>
               <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                Here you can edit data of produt.
+                Here you can edit data of product.
               </p>
             </div>
             <button
@@ -127,6 +189,7 @@ const EditProductModel = ({ isOpen, onClose }) => {
               />
             </button>
           </div>
+          
           <div className="flex-1 overflow-y-auto px-6 py-6 bg-slate-50 dark:bg-slate-900/50 transition-colors">
             <div className="space-y-6">
               <div>
@@ -138,7 +201,10 @@ const EditProductModel = ({ isOpen, onClose }) => {
                     <>
                       <button
                         type="button"
-                        onClick={() => setImagePreview(null)}
+                        onClick={() => {
+                          setImagePreview(null);
+                          setImageFile(null);
+                        }}
                         className="rounded-full absolute -top-3 -right-2 z-50 bg-red-500/70 cursor-pointer p-1.5 text-white transition-colors"
                       >
                         <X
@@ -163,15 +229,15 @@ const EditProductModel = ({ isOpen, onClose }) => {
                       </p>
                       <input
                         type="file"
-                        onChange={handelImage}
+                        onChange={handleImage}
                         accept="image/*"
                         className="absolute inset-0 cursor-pointer opacity-0"
-                        required
                       />
                     </>
                   )}
                 </div>
               </div>
+
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
@@ -181,8 +247,8 @@ const EditProductModel = ({ isOpen, onClose }) => {
                     type="text"
                     name="name"
                     required
-                    value={productData.name}
-                    onChange={handel}
+                    value={productData.name || ""}
+                    onChange={handle}
                     placeholder="e.g. Minimalist Watch"
                     className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all"
                   />
@@ -197,8 +263,8 @@ const EditProductModel = ({ isOpen, onClose }) => {
                       type="text"
                       name="sku"
                       required
-                      value={productData.sku}
-                      onChange={handel}
+                      value={productData.sku || ""}
+                      onChange={handle}
                       placeholder="e.g. PRD-001"
                       className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all"
                     />
@@ -209,11 +275,11 @@ const EditProductModel = ({ isOpen, onClose }) => {
                     </label>
                     <div className="relative">
                       <div className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all appearance-none">
-                        {productData.stock <= 20 && productData.stock > 0 ? (
+                        {Number(productData.stock) <= 20 && Number(productData.stock) > 0 ? (
                           <span className="text-yellow-600 dark:text-yellow-400">
                             Low Stock
                           </span>
-                        ) : productData.stock > 20 ? (
+                        ) : Number(productData.stock) > 20 ? (
                           <span className="text-green-600 dark:text-green-400">
                             In Stock
                           </span>
@@ -242,8 +308,8 @@ const EditProductModel = ({ isOpen, onClose }) => {
                         name="price"
                         onWheel={(e) => e.currentTarget.blur()}
                         step="any"
-                        value={productData.price}
-                        onChange={handel}
+                        value={productData.price || ""}
+                        onChange={handle}
                         placeholder="0.00"
                         className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 py-2.5 pl-7 pr-4 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                       />
@@ -259,8 +325,8 @@ const EditProductModel = ({ isOpen, onClose }) => {
                       step="any"
                       max={999}
                       name="stock"
-                      value={productData.stock}
-                      onChange={handel}
+                      value={productData.stock || ""}
+                      onChange={handle}
                       placeholder="0"
                       className="w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all"
                     />
@@ -302,4 +368,5 @@ const EditProductModel = ({ isOpen, onClose }) => {
     </div>
   );
 };
+
 export default EditProductModel;

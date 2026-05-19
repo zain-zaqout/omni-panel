@@ -3,19 +3,16 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDKz6OBCm_iHqdzFobhyT6KdFHV7nyYGdI",
-  authDomain: "omni-panel-dashboard.firebaseapp.com",
-  projectId: "omni-panel-dashboard",
-  storageBucket: "omni-panel-dashboard.firebasestorage.app",
-  messagingSenderId: "1007200075768",
-  appId: "1:1007200075768:web:33fb568152a0615a6aa00d",
-  measurementId: "G-NZ81YCGE01"
+  apiKey: "AIzaSyAN1x4-JCHKmmk1LzLWiueBlmWQ4BgXNg4",
+  authDomain: "omni-panel-2-1.firebaseapp.com",
+  projectId: "omni-panel-2-1",
+  storageBucket: "omni-panel-2-1.firebasestorage.app",
+  messagingSenderId: "796438216857",
+  appId: "1:796438216857:web:5da8df1f5557d261857808",
+  measurementId: "G-2ZDBJRJSWD"
 };
 
 const app = initializeApp(firebaseConfig);
 
-// 2. تعريف محرك قاعدة البيانات
 export const db = getFirestore(app);
-
-// 3. تعريف محرك الهوية (هاد اللي بيصنع الـ UID وبيحفظ الجلسة في المتصفح)
 export const auth = getAuth(app);

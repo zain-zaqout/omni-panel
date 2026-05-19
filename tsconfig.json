@@ -36,7 +36,7 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts",
     "src/middleware.js"
-  ],
+, "src/contexts/AuthContext.jsx", "src/app/login/page.jsx", "src/app/login/layout.jsx", "src/app/analytics/layout.jsx", "src/app/analytics/page.jsx", "src/app/customers/layout.jsx", "src/app/customers/page.tsx", "src/app/orders/layout.jsx", "src/app/orders/page.jsx", "src/app/products/layout.jsx", "src/app/products/page.jsx", "src/app/profile/layout.jsx", "src/app/profile/page.jsx", "src/app/layout.jsx", "src/app/page.jsx", "src/contexts/UserContext.jsx", "src/contexts/MenuContext.jsx", "src/components/Aside.jsx", "src/components/ColumnChart.tsx", "src/components/CustomerCards.jsx", "src/components/CustomerTable.jsx", "src/components/Footer.jsx", "src/components/Navbar.jsx", "src/components/NumberTicker.jsx", "src/components/OrdersCards.jsx", "src/components/OrdersTable.tsx", "src/app/logup/page.tsx", "src/components/AreaChart.jsx", "src/components/FullPageLoader.jsx", "src/components/OverviewSection.jsx", "src/components/PieChart.jsx", "src/components/Preferences.jsx", "src/components/ProductsCard.jsx", "src/components/TrafficSources.jsx", "src/components/Security.jsx", "src/components/ui/Toggle.jsx", "src/components/ui/TableSkeleton.jsx", "src/components/ProductsTable.jsx", "src/app/logup/page.jsx", "src/components/AddProducttModel.jsx", "src/contexts/OrderContext.Jsx", "src/contexts/EditProductContext.jsx", "src/components/EditProductModel.tsx", "src/components/AnimationWrapper.tsx"  ],
   "exclude": [
     "node_modules"
   ]
