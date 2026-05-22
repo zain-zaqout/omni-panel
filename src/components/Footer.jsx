@@ -5,28 +5,28 @@ import { usePathname } from "next/navigation";
 
 const Footer = () => {
   const socialLinks = [
-    { 
+    {
       id: "github",
-      icon: <FaGithub size={19} />, 
-      href: "https://github.com/zain-zaqout", 
+      icon: <FaGithub size={19} />,
+      href: "https://github.com/zain-zaqout",
       hover: "hover:bg-slate-200 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white hover:border-slate-400 dark:hover:border-white/50",
     },
-    { 
-      id: "whatsapp",   
-      icon: <MessageCircle size={18} />, 
-      href: "tel:+970593906089", 
+    {
+      id: "whatsapp",
+      icon: <MessageCircle size={18} />,
+      href: "https://wa.me/970593906089",
       hover: "hover:bg-emerald-500/10 hover:text-emerald-500 dark:hover:text-emerald-400 hover:border-emerald-500/50",
     },
-    { 
+    {
       id: "linkedin",
-      icon: <FaLinkedin size={18} />, 
-      href: "#", 
+      icon: <FaLinkedin size={18} />,
+      href: "#",
       hover: "hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-500/50",
     },
-    { 
+    {
       id: "portfolio",
-      icon: <BriefcaseBusiness size={18} />, 
-      href: "#", 
+      icon: <BriefcaseBusiness size={18} />,
+      href: "#",
       hover: "hover:bg-violet-500/10 hover:text-violet-600 dark:hover:text-violet-400 hover:border-violet-500/50",
     },
   ];
@@ -43,7 +43,7 @@ const Footer = () => {
       text-slate-600 dark:text-white shadow-lg
     `}>
       <div className="w-[90%] m-auto flex flex-col min-[490px]:flex-row min-[490px]:py-0 items-center justify-between md:gap-4">
-        
+
         <div className="flex items-center gap-2">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -71,7 +71,7 @@ const Footer = () => {
             </a>
           ))}
         </div>
-        
+
       </div>
     </footer>
   );

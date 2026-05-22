@@ -3,6 +3,7 @@ import {
   BarChart3,
   Box,
   LayoutDashboard,
+  Loader2,
   LogOut,
   ShoppingCart,
   Users2,
@@ -10,16 +11,21 @@ import {
 } from "lucide-react";
 import { deleteCookie } from "cookies-next";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useMenu } from "@/contexts/MenuContext";
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useProduct } from "@/contexts/EditProductContext";
+import { useState } from "react";
 
 const Aside = () => {
+
+  const [Loading, setLoading] = useState(false)
+  const router = useRouter();
+
   const pathName = usePathname();
   const { Menu, setMenu } = useMenu();
-  const {setProducts} = useProduct()
+  const { setProducts } = useProduct()
   if (pathName === "/profile" || pathName === "/login" || pathName === "/logup") {
     return null;
   }
@@ -52,16 +58,19 @@ const Aside = () => {
     },
   ];
 
-  const logOut = () => {
-    setTimeout(() => {
-      deleteCookie("auth_token");
-      localStorage.clear();
-      signOut(auth);
+  const logOut = async () => {
+    setLoading(true)
+    try {
+      await signOut(auth);
+      await deleteCookie("auth_token");
       setProducts([]);
-      window.location.href = "/login";
-    }, 1500);
+      localStorage.clear();
+      router.push("/login");
+    } catch (error) {
+      toast.error("some thing went error!")
+      setLoading(false)
+    }
   };
-
 
   return (
     <>
@@ -69,14 +78,12 @@ const Aside = () => {
         type="button"
         aria-label="Close menu"
         onClick={() => setMenu(false)}
-        className={`fixed inset-0 z-30 bg-black/40 min-[376px]:hidden ${
-          Menu ? "block" : "hidden"
-        }`}
+        className={`fixed inset-0 z-30 bg-black/40 min-[376px]:hidden ${Menu ? "block" : "hidden"
+          }`}
       />
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-55 border-r border-slate-200 dark:border-gray-700 bg-white dark:bg-slate-800 transition-transform duration-300 min-[376px]:w-15 min-[376px]:translate-x-0 lg:w-55 ${
-          Menu ? "translate-x-0" : "-translate-x-full"
-        } min-[376px]:flex`}
+        className={`fixed inset-y-0 left-0 z-40 w-55 border-r border-slate-200 dark:border-gray-700 bg-white dark:bg-slate-800 transition-transform duration-300 min-[376px]:w-15 min-[376px]:translate-x-0 lg:w-55 ${Menu ? "translate-x-0" : "-translate-x-full"
+          } min-[376px]:flex`}
       >
         <div className="flex h-full w-full flex-col">
           <div className="flex h-[9vh] items-center justify-between border-b border-slate-200 dark:border-gray-700 px-4 min-[376px]:justify-center min-[376px]:px-2 lg:justify-start lg:px-4">
@@ -113,11 +120,10 @@ const Aside = () => {
                       <Link
                         href={item.link}
                         onClick={() => setMenu(false)}
-                        className={`flex w-full relative cursor-pointer items-center justify-start gap-3 rounded-xl px-4 py-2.5 text-left font-medium transition-all duration-200 active:scale-95 min-[376px]:justify-center min-[376px]:px-2 lg:justify-start lg:px-4 ${
-                          isActive
-                            ? "bg-violet-500/10 text-violet-600 dark:text-violet-400 shadow-sm"
-                            : "text-slate-500 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-slate-700/70 hover:text-slate-900 dark:hover:text-white"
-                        }`}
+                        className={`flex w-full relative cursor-pointer items-center justify-start gap-3 rounded-xl px-4 py-2.5 text-left font-medium transition-all duration-200 active:scale-95 min-[376px]:justify-center min-[376px]:px-2 lg:justify-start lg:px-4 ${isActive
+                          ? "bg-violet-500/10 text-violet-600 dark:text-violet-400 shadow-sm"
+                          : "text-slate-500 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-slate-700/70 hover:text-slate-900 dark:hover:text-white"
+                          }`}
                       >
                         {item.icon}
                         <span className="hidden lg:inline text-sm">
@@ -132,11 +138,6 @@ const Aside = () => {
                             12
                           </span>
                         )}
-                        {item.head === "Orders" && (
-                          <span className="flex min-[376px]:hidden absolute right-4 text-[11px] font-bold items-center justify-center w-5 h-5 bg-violet-500 text-white rounded-full">
-                            12
-                          </span>
-                        )}
                       </Link>
                     </li>
                   );
@@ -147,16 +148,24 @@ const Aside = () => {
               <button
                 className="flex w-full focus:ring-2 
              focus:ring-red-500 
-             focus:ring-offset-2  items-center justify-center gap-2 rounded-xl bg-red-100 dark:bg-red-500/20 py-2.5 transition-all duration-200 hover:bg-red-200 dark:hover:bg-red-500/30 group cursor-pointer"
+             focus:ring-offset-2 dark:focus:ring-offset-slate-800 items-center justify-center gap-2 rounded-xl bg-red-100 dark:bg-red-500/20 py-2.5 transition-all duration-200 hover:bg-red-200 dark:hover:bg-red-500/30 group cursor-pointer"
                 onClick={logOut}
+                disabled={Loading}
               >
-                <LogOut size={16} className="text-red-500 dark:text-red-400" />
-                <span className="hidden text-sm font-bold text-red-600 dark:text-red-300 lg:inline">
-                  Log Out
-                </span>
-                <span className="inline min-[376px]:hidden text-sm font-bold text-red-600 dark:text-red-300">
-                  Log Out
-                </span>
+                {
+                  Loading ? (
+                    <>
+                      <span><Loader2 className="animate-spin text-red-500" /></span>
+                    </>
+                  ) : (
+                    <>
+                      <LogOut size={16} className="text-red-500 dark:text-red-400" />
+                      <span className="hidden text-sm font-bold text-red-600 dark:text-red-300 lg:inline">
+                        Log Out
+                      </span>
+                    </>
+                  )
+                }
               </button>
             </div>
           </div>

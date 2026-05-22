@@ -1,14 +1,14 @@
 ﻿"use client";
 import { FileDown, Plus, Search, ChevronDown, FilterIcon } from "lucide-react";
 import { AnimationWrapper } from "@/components/AnimationWrapper";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ProductsTable from "@/components/ProductsTable";
 import { AddProducttModel } from "@/components/AddProducttModel";
 import ProductsCard from "@/components/ProductsCard";
 import { useProduct } from "@/contexts/EditProductContext";
 
 const Products = () => {
-  
+
   const [isModelOpen, setIsModelOpen] = useState(false);
   const [stockFilter, setstockFilter] = useState("All");
   const [searchTerm, setsearchTerm] = useState("");
@@ -17,8 +17,8 @@ const Products = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const Filter = ["All", "In Stock", "Low Stock", "Out of Stock"];
 
-  const { products, setProducts } = useProduct();
-  
+  const { products } = useProduct();
+
 
   const filteredProducts = products.filter((item) => {
     const matchesSearch =
@@ -120,7 +120,7 @@ const Products = () => {
 
         <AnimationWrapper delay={0.4}>
           <ProductsTable
-            
+
             filteredProducts={filteredProducts}
           />
         </AnimationWrapper>

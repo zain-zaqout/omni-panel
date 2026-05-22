@@ -1,137 +1,124 @@
-# Admin Dashboard (Omni Panel)
+# 🎛️ Omni Panel
 
-[عرض حي للمشروع (Live Demo)](https://omni-panel-alpha.vercel.app/products)
+A modern, high-performance e-commerce **admin dashboard** built with **Next.js 15** and **React 19**, designed to deliver a seamless and blazing-fast management experience for products, orders, and customers.
 
-An e-commerce admin dashboard built with Next.js (App Router), featuring modern UI, charts, and data tables for products, orders, and customers.
+## 🌐 Live Demo
 
-لوحة تحكم لإدارة متجر إلكتروني مبنية بـ Next.js (App Router) مع واجهة حديثة، رسوم بيانية، وجداول بيانات لإدارة المنتجات والطلبات والعملاء.
+Experience the live application here:  
+**👉 [Omni Panel - Live Demo](https://omni-panel-alpha.vercel.app/products)**
 
-**Features**
-- Overview dashboard with KPI cards and charts.
-- Detailed analytics powered by `ApexCharts`.
-- Orders management with search, filters, and payment status.
-- Products management (add/edit/delete) with `localStorage` persistence.
-- Customers management with cards, tables, and filters.
-- Profile page with editable details, security, and preferences.
-- Demo login using `auth_token` cookie protected by `middleware`.
-- Theme support via `next-themes` and motion via `framer-motion`.
+---
 
-**المزايا**
-- لوحة نظرة عامة مع بطاقات إحصائية ورسوم بيانية.
-- تحليلات تفصيلية باستخدام `ApexCharts`.
-- إدارة الطلبات مع بحث وفلاتر وحالة الدفع.
-- إدارة المنتجات (إضافة/تعديل/حذف) مع حفظ محلي عبر `localStorage`.
-- إدارة العملاء مع بطاقات وجداول وفلاتر.
-- صفحة الملف الشخصي مع تعديل البيانات والأمان والتفضيلات.
-- تسجيل دخول تجريبي يعتمد على كوكي `auth_token` مع حماية عبر `middleware`.
-- دعم الثيمات عبر `next-themes` وانتقالات `framer-motion`.
+## ✨ Features
 
-**Routes**
-- `/` Overview
-- `/analytics` Analytics
-- `/orders` Orders
-- `/products` Products
-- `/customers` Customers
-- `/profile` Profile
-- `/login` Login
+- **📊 Overview Dashboard:** Dynamic KPI cards and interactive charts for a bird's-eye view of your store.
+- **📈 Detailed Analytics:** Deep-dive analytics and reports powered by ApexCharts.
+- **📦 Orders Management:** Full orders tracking with search, filters, and payment status.
+- **🛍️ Products Management:** Complete CRUD operations (add/edit/delete) with `localStorage` persistence.
+- **👥 Customers Management:** Customer cards, data tables, and advanced filters.
+- **👤 Profile Page:** Editable personal details, security settings, and preferences.
+- **🔐 Demo Authentication:** Secure login using `auth_token` cookie protected by middleware.
+- **🎨 Theme Support:** Light/dark mode via `next-themes` with smooth `framer-motion` transitions.
+- **📱 Ultra Responsive:** Fully optimized for pixel-perfect display across mobile, tablet, and desktop devices.
 
-**المسارات الأساسية**
-- `/` نظرة عامة
-- `/analytics` التحليلات
-- `/orders` الطلبات
-- `/products` المنتجات
-- `/customers` العملاء
-- `/profile` الملف الشخصي
-- `/login` تسجيل الدخول
+---
 
-**Tech Stack**
-- `Next.js 15.2.9` + `React 19.0.0`
-- `TypeScript`
-- `Tailwind CSS 4`
-- `@tanstack/react-table 8.21.2`
-- `ApexCharts 4.0.0` + `react-apexcharts 1.7.0`
-- `framer-motion 11.11.17`
-- `next-themes 0.4.3`
-- `lucide-react`
-- `react-icons 5.6.0`
-- `sonner 1.7.0` for toasts
+## 🚀 Technologies Used
 
-**التقنيات المستخدمة**
-- `Next.js 15.2.9` + `React 19.0.0`
-- `TypeScript`
-- `Tailwind CSS 4`
-- `@tanstack/react-table 8.21.2`
-- `ApexCharts 4.0.0` + `react-apexcharts 1.7.0`
-- `framer-motion 11.11.17`
-- `next-themes 0.4.3`
-- `lucide-react`
-- `react-icons 5.6.0`
-- `sonner 1.7.0` للتنبيهات
+| Technology                       | Category      | Description                                          |
+| :------------------------------- | :------------ | :--------------------------------------------------- |
+| **Next.js 15.2.9**               | Framework     | App Router, Server Components, and optimized routing |
+| **React 19.0.0**                 | Library       | Next-generation UI rendering and modern hooks        |
+| **TypeScript**                   | Language      | Type-safe development for robust, maintainable code  |
+| **Tailwind CSS v4**              | Styling       | Utility-first, high-performance styling framework    |
+| **@tanstack/react-table 8.21.2** | Data Tables   | Headless, powerful, and flexible table management    |
+| **ApexCharts 4.0.0**             | Charts        | Interactive, responsive data visualization           |
+| **Framer Motion 11.11.17**       | Animations    | Smooth, declarative animations and transitions       |
+| **next-themes 0.4.3**            | Theming       | Seamless light/dark mode switching                   |
+| **Lucide & React Icons**         | Icons         | Crisp, clean, and highly customizable vector icons   |
+| **Sonner 1.7.0**                 | Notifications | Beautiful, non-blocking toast notifications          |
 
-**Run Locally**
+---
+
+## 📁 Project Structure
+
+The project follows a modular and clean directory layout using the Next.js App Router:
+
+```text
+src/
+├── app/               # Next.js App Router (Pages, Layouts, & Routes)
+│   ├── /              # Overview Dashboard (KPIs, Charts)
+│   ├── /analytics     # Detailed Analytics & Reports
+│   ├── /orders        # Orders Management & Tracking
+│   ├── /products      # Products Management (CRUD)
+│   ├── /customers     # Customers Management & Filters
+│   ├── /profile       # User Profile & Settings
+│   └── /login         # Demo Authentication
+├── components/        # Reusable UI Components (Cards, Tables, Charts, Navigation)
+└── contexts/          # State Management & Seed Data
+```
+
+---
+
+## 📦 Getting Started
+
+To get a local copy up and running, follow these simple steps:
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/zain-zaqout/omni-panel.git
+cd omni-panel
+```
+
+### 2. Install Dependencies
+
 ```bash
 npm install
+```
+
+### 3. Run the Development Server
+
+```bash
 npm run dev
 ```
-Open `http://localhost:3000`.
 
-**تشغيل المشروع محليًا**
-```bash
-npm install
-npm run dev
-```
-افتح `http://localhost:3000`.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-**Build and Start**
-```bash
-npm run build
-npm start
-```
+---
 
-**البناء والتشغيل**
-```bash
-npm run build
-npm start
-```
+## 🛠️ Available Scripts
 
-**Lint**
-```bash
-npm run lint
-```
+In the project directory, you can run:
 
-**الفحص**
-```bash
-npm run lint
-```
+- `npm run dev` - Runs the app in development mode.
 
-**Project Structure**
-- `src/app` App routes and pages.
-- `src/components` UI components (cards, tables, charts, navigation).
-- `src/contexts` State management and seed data.
-- `src/middleware.js` Auth redirect logic.
-- `public/assets` Static images and assets.
+- `npm run build` - Builds the application for production usage.
 
-**هيكل المجلدات**
-- `src/app` صفحات المشروع والمسارات.
-- `src/components` مكوّنات الواجهة (بطاقات، جداول، رسوم، تنقل).
-- `src/contexts` إدارة الحالة والبيانات الافتراضية.
-- `src/middleware.js` منطق التوجيه والحماية.
-- `public/assets` الصور والأصول.
+- `npm run start` - Starts the production server after building.
 
-**Data Notes**
-- Seed data lives in `contexts`.
-- Product/order/customer/profile changes persist in `localStorage`.
-- Clear browser storage to restore defaults.
+- `npm run lint` - Runs ESLint to check for code quality and syntax issues.
 
-**ملاحظات البيانات**
-- البيانات الافتراضية مخزنة داخل `contexts`.
-- التغييرات على المنتجات/الطلبات/العملاء والملف الشخصي تُحفظ في `localStorage`.
-- يمكن مسح البيانات المحلية من المتصفح لإعادة الحالة الافتراضية.
+---
 
-**Login**
-- `/login` sets a demo `auth_token` cookie and redirects to `/`.
-- `middleware` blocks other routes without the cookie.
+## 🤝 Contributing
 
-**تسجيل الدخول**
-- صفحة `/login` تضيف كوكي `auth_token` تجريبية ثم تعيد التوجيه إلى الصفحة الرئيسية.
-- `middleware` يمنع الوصول لباقي الصفحات بدون الكوكي.
+Contributions make the open-source community an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+
+5. Open a Pull Request
+
+---
+
+## 👤 Author
+
+Developed with ❤️ by **Zain**
+
+GitHub: [@zain-zaqout](https://github.com/zain-zaqout)
