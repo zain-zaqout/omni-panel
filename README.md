@@ -29,7 +29,6 @@ Experience the live application here:
 | :------------------------------- | :------------ | :--------------------------------------------------- |
 | **Next.js 15.2.9**               | Framework     | App Router, Server Components, and optimized routing |
 | **React 19.0.0**                 | Library       | Next-generation UI rendering and modern hooks        |
-| **TypeScript**                   | Language      | Type-safe development for robust, maintainable code  |
 | **Tailwind CSS v4**              | Styling       | Utility-first, high-performance styling framework    |
 | **@tanstack/react-table 8.21.2** | Data Tables   | Headless, powerful, and flexible table management    |
 | **ApexCharts 4.0.0**             | Charts        | Interactive, responsive data visualization           |
