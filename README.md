@@ -1,48 +1,67 @@
-# 🎛️ Omni Panel
+# Admin Dashboard (Omni Panel) 📊
 
-A modern, high-performance e-commerce **admin dashboard** built with **Next.js 15** and **React 19**, designed to deliver a seamless and blazing-fast management experience for products, orders, and customers.
+> لوحة تحكم متكاملة لإدارة المتجر الإلكتروني مبنية بـ Next.js و Tailwind CSS 4 ومتصلة بـ Firebase
+
+[![Next.js](https://img.shields.io/badge/Next.js-15.2.9-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.0.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?style=for-the-badge&logo=vercel)](https://vercel.com/)
+
+An e-commerce admin dashboard built with Next.js (App Router), featuring modern UI, charts, and data tables for products, orders, and customers, fully integrated with Firebase Firestore.
+
+لوحة تحكم لإدارة متجر إلكتروني مبنية بـ Next.js (App Router) مع واجهة حديثة، رسوم بيانية، وجداول بيانات لإدارة المنتجات والطلبات والعملاء، ومتكاملة بالكامل مع قاعدة بيانات Firebase.
+
+---
 
 ## 🌐 Live Demo
 
-Experience the live application here:  
 **👉 [Omni Panel - Live Demo](https://omni-panel-alpha.vercel.app)**
 
 ---
 
-## ✨ Features
+## ✨ المميزات | Features
 
-- **📊 Overview Dashboard:** Dynamic KPI cards and interactive charts for a bird's-eye view of your store.
-- **📈 Detailed Analytics:** Deep-dive analytics and reports powered by ApexCharts.
-- **📦 Orders Management:** Full orders tracking with search, filters, and payment status.
-- **🛍️ Products Management:** Complete CRUD operations (add/edit/delete) with `localStorage` persistence.
-- **👥 Customers Management:** Customer cards, data tables, and advanced filters.
-- **👤 Profile Page:** Editable personal details, security settings, and preferences.
-- **🔐 Demo Authentication:** Secure login using `auth_token` cookie protected by middleware.
-- **🎨 Theme Support:** Light/dark mode via `next-themes` with smooth `framer-motion` transitions.
-- **📱 Ultra Responsive:** Fully optimized for pixel-perfect display across mobile, tablet, and desktop devices.
-
----
-
-## 🚀 Technologies Used
-
-| Technology                       | Category      | Description                                          |
-| :------------------------------- | :------------ | :--------------------------------------------------- |
-| **Next.js 15.2.9**               | Framework     | App Router, Server Components, and optimized routing |
-| **React 19.0.0**                 | Library       | Next-generation UI rendering and modern hooks        |
-| **TypeScript**                   | Language      | Type-safe development for robust, maintainable code  |
-| **Tailwind CSS v4**              | Styling       | Utility-first, high-performance styling framework    |
-| **@tanstack/react-table 8.21.2** | Data Tables   | Headless, powerful, and flexible table management    |
-| **ApexCharts 4.0.0**             | Charts        | Interactive, responsive data visualization           |
-| **Framer Motion 11.11.17**       | Animations    | Smooth, declarative animations and transitions       |
-| **next-themes 0.4.3**            | Theming       | Seamless light/dark mode switching                   |
-| **Lucide & React Icons**         | Icons         | Crisp, clean, and highly customizable vector icons   |
-| **Sonner 1.7.0**                 | Notifications | Beautiful, non-blocking toast notifications          |
+| الميزة                           | Description                                                              |
+| :------------------------------- | :----------------------------------------------------------------------- |
+| 📊 **لوحة نظرة عامة**            | Overview dashboard with KPI cards and charts.                            |
+| 📈 **تحليلات تفصيلية**           | Detailed analytics powered by `ApexCharts`.                              |
+| 📦 **إدارة الطلبات**             | Orders management with search, filters, and payment status.              |
+| 🔥 **إدارة المنتجات (Firebase)** | Products management (add/edit/delete) synced with Firebase Firestore.    |
+| 👥 **إدارة العملاء**             | Customers management with cards, tables, and filters.                    |
+| 👤 **الملف الشخصي المتزامن**     | Profile page with editable user details and security saved via Firebase. |
+| 🔐 **تسجيل دخول تجريبي**         | Demo login using `auth_token` cookie protected by `middleware`.          |
+| 🎨 **دعم الثيمات والحركة**       | Theme support via `next-themes` and motion via `framer-motion`.          |
 
 ---
 
-## 📁 Project Structure
+## 🛠️ التقنيات المستخدمة | Tech Stack
 
-The project follows a modular and clean directory layout using the Next.js App Router:
+### Frontend & Core
+
+- **[Next.js 15.2.9](https://nextjs.org/)** — إطار عمل React المتقدم مع الـ App Router.
+- **[React 19.0.0](https://react.dev/)** — مكتبة بناء واجهات المستخدم.
+- **[Tailwind CSS 4](https://tailwindcss.com/)** — لتصميم عصري وسريع التجاوب بأحدث الإصدارات.
+
+### Backend & Database
+
+- **[Cloud Firestore (Firebase)](https://firebase.google.com/products/firestore)** — قاعدة بيانات سحابية لإدارة وتخزين بيانات المنتجات والمستخدمين في الوقت الفعلي.
+
+### Data & Visualization
+
+- **[@tanstack/react-table 8.21.2](https://tanstack.com/table)** — لإدارة وعرض الجداول المتقدمة.
+- **[ApexCharts 4.0.0](https://apexcharts.com/) + react-apexcharts** — لبناء الرسوم البيانية التفاعلية.
+
+### UI & UX Extensions
+
+- **[Framer Motion 11.11.17](https://www.framer.com/motion/)** — لإضافة حركات وانتقالات سلسة للواجهة.
+- **[Next Themes 0.4.3](https://github.com/pacocoursey/next-themes)** — لدعم الوضع الداكن والفاتح بسهولة.
+- **[Lucide React](https://lucide.dev/) & React Icons 5.6.0** — حزم أيقونات عالية الجودة ومتنوعة.
+- **[Sonner 1.7.0](https://sonner.emilkowal.ski/)** — لظهور التنبيهات (Toasts) بشكل أنيق ومباشر.
+
+---
+
+## 📁 هيكل المشروع | Project Structure
 
 ```text
 src/
