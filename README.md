@@ -5,7 +5,7 @@ A modern, high-performance e-commerce **admin dashboard** built with **Next.js 1
 ## 🌐 Live Demo
 
 Experience the live application here:  
-**👉 [Omni Panel - Live Demo](https://omni-panel-alpha.vercel.app/products)**
+**👉 [Omni Panel - Live Demo](https://omni-panel-alpha.vercel.app)**
 
 ---
 

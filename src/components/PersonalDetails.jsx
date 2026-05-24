@@ -76,7 +76,7 @@ const PersonalDetails = () => {
             <div className="relative mt-1.5">
               <Phone
                 size={19}
-                className={`${showActions ? "text-violet-500" : "text-slate-400"} pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 transition-colors`}
+                className="text-slate-400 pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 transition-colors"
               />
               <input
                 id="phone"

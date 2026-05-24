@@ -17,6 +17,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useProduct } from "@/contexts/EditProductContext";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Aside = () => {
 
@@ -26,6 +27,8 @@ const Aside = () => {
   const pathName = usePathname();
   const { Menu, setMenu } = useMenu();
   const { setProducts } = useProduct()
+  const { setCurrentUser, setIsAuthReady } = useAuth()
+
   if (pathName === "/profile" || pathName === "/login" || pathName === "/logup") {
     return null;
   }
@@ -63,11 +66,16 @@ const Aside = () => {
     try {
       await signOut(auth);
       await deleteCookie("auth_token");
+
       setProducts([]);
+      setMenu(false)
+      setCurrentUser(null)
       localStorage.clear();
-      router.push("/login");
+
+      router.replace("/login");
     } catch (error) {
       toast.error("some thing went error!")
+    } finally {
       setLoading(false)
     }
   };

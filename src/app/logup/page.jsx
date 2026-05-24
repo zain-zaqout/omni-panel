@@ -149,7 +149,7 @@ const Page = () => {
                 {Loading ? <Loader2 className="animate-spin" /> : <>Create An Account</>}
               </button>
             </div>
-            <div className="flex py-3 text-center">
+            <div className="flex justify-center py-4 text-center">
               <p className="text-[15px] font-semibold text-gray-600">
                 Already have an
                 <Link href="/login" className="text-blue-500 hover:text-blue-600 underline"> Account?</Link>

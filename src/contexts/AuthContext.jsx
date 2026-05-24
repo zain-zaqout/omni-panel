@@ -65,6 +65,7 @@ export const AuthContext = ({ children }) => {
           dispatch,
           currentUser,
           setCurrentUser,
+          setIsAuthReady,
           isAuthReady
         }}
       >

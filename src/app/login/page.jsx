@@ -19,9 +19,6 @@ const page = () => {
   const {
     Data,
     dispatch,
-    isAuthReady,
-    setIsAuthReady,
-    currentUser,
     setCurrentUser
   } = useAuth()
   const { seteditName, setdisplayName } = useData()
@@ -60,7 +57,7 @@ const page = () => {
       dispatch({ type: "email", val: "" });
       dispatch({ type: "password", val: "" });
       setCookie("auth_token", { maxAge: 60 * 60 * 24 * 7, path: "/" });
-      
+
       router.replace("/")
     } catch (error) {
       if (error.code === "auth/wrong-password") {
@@ -138,9 +135,9 @@ const page = () => {
             </div>
             <div className="pt-3">
               <div className="flex justify-between">
-                <div className="">
+                <div>
                   <input id="check" type="checkbox" className="mr-1" />
-                  <label htmlFor="check" className="select-none">
+                  <label htmlFor="check" className="select-none bg-white">
                     Remeber Me
                   </label>
                 </div>
@@ -174,8 +171,8 @@ const page = () => {
             </div>
           </form>
         </div>
-        <div className="w-[80%] m-auto mt-4">
-          <p className="pb-4 text-[15px] font-semibold text-gray-600">
+        <div className="flex justify-center w-[80%] m-auto py-4">
+          <p className="text-[15px] font-semibold text-gray-600">
             You Dont Have Acount{" "}
             <Link
               href="/logup"
