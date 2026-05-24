@@ -37,6 +37,8 @@ An e-commerce admin dashboard built with Next.js (App Router), featuring modern 
 
 ## 🛠️ التقنيات المستخدمة | Tech Stack
 
+<<<<<<< HEAD
+
 ### Frontend & Core
 
 - **[Next.js 15.2.9](https://nextjs.org/)** — إطار عمل React المتقدم مع الـ App Router.
@@ -57,7 +59,19 @@ An e-commerce admin dashboard built with Next.js (App Router), featuring modern 
 - **[Framer Motion 11.11.17](https://www.framer.com/motion/)** — لإضافة حركات وانتقالات سلسة للواجهة.
 - **[Next Themes 0.4.3](https://github.com/pacocoursey/next-themes)** — لدعم الوضع الداكن والفاتح بسهولة.
 - **[Lucide React](https://lucide.dev/) & React Icons 5.6.0** — حزم أيقونات عالية الجودة ومتنوعة.
-- **[Sonner 1.7.0](https://sonner.emilkowal.ski/)** — لظهور التنبيهات (Toasts) بشكل أنيق ومباشر.
+- # **[Sonner 1.7.0](https://sonner.emilkowal.ski/)** — لظهور التنبيهات (Toasts) بشكل أنيق ومباشر.
+  | Technology                       | Category      | Description                                          |
+  | :------------------------------- | :------------ | :--------------------------------------------------- |
+  | **Next.js 15.2.9**               | Framework     | App Router, Server Components, and optimized routing |
+  | **React 19.0.0**                 | Library       | Next-generation UI rendering and modern hooks        |
+  | **Tailwind CSS v4**              | Styling       | Utility-first, high-performance styling framework    |
+  | **@tanstack/react-table 8.21.2** | Data Tables   | Headless, powerful, and flexible table management    |
+  | **ApexCharts 4.0.0**             | Charts        | Interactive, responsive data visualization           |
+  | **Framer Motion 11.11.17**       | Animations    | Smooth, declarative animations and transitions       |
+  | **next-themes 0.4.3**            | Theming       | Seamless light/dark mode switching                   |
+  | **Lucide & React Icons**         | Icons         | Crisp, clean, and highly customizable vector icons   |
+  | **Sonner 1.7.0**                 | Notifications | Beautiful, non-blocking toast notifications          |
+  > > > > > > > ae87cc8975bf98b71b87e3c5599fe70a3df1c763
 
 ---
 
