@@ -37,8 +37,6 @@ An e-commerce admin dashboard built with Next.js (App Router), featuring modern 
 
 ## 🛠️ التقنيات المستخدمة | Tech Stack
 
-<<<<<<< HEAD
-
 ### Frontend & Core
 
 - **[Next.js 15.2.9](https://nextjs.org/)** — إطار عمل React المتقدم مع الـ App Router.
@@ -71,7 +69,6 @@ An e-commerce admin dashboard built with Next.js (App Router), featuring modern 
   | **next-themes 0.4.3**            | Theming       | Seamless light/dark mode switching                   |
   | **Lucide & React Icons**         | Icons         | Crisp, clean, and highly customizable vector icons   |
   | **Sonner 1.7.0**                 | Notifications | Beautiful, non-blocking toast notifications          |
-  > > > > > > > ae87cc8975bf98b71b87e3c5599fe70a3df1c763
 
 ---
 
