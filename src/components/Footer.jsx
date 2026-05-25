@@ -1,7 +1,8 @@
 "use client"
-import { MessageCircle, BriefcaseBusiness } from 'lucide-react';
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { BriefcaseBusiness } from 'lucide-react';
+import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { usePathname } from "next/navigation";
+import { toast } from 'sonner';
 
 const Footer = () => {
   const socialLinks = [
@@ -13,20 +14,20 @@ const Footer = () => {
     },
     {
       id: "whatsapp",
-      icon: <MessageCircle size={18} />,
+      icon: <FaWhatsapp size={21.5} />,
       href: "https://wa.me/970593906089",
       hover: "hover:bg-emerald-500/10 hover:text-emerald-500 dark:hover:text-emerald-400 hover:border-emerald-500/50",
     },
     {
       id: "linkedin",
       icon: <FaLinkedin size={18} />,
-      href: "#",
+      href: "",
       hover: "hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-500/50",
     },
     {
       id: "portfolio",
-      icon: <BriefcaseBusiness size={18} />,
-      href: "#",
+      icon: <BriefcaseBusiness size={20} />,
+      href: "",
       hover: "hover:bg-violet-500/10 hover:text-violet-600 dark:hover:text-violet-400 hover:border-violet-500/50",
     },
   ];
@@ -54,22 +55,37 @@ const Footer = () => {
           </p>
         </div>
         <div className="flex items-center gap-2 sm:gap-1">
-          {socialLinks.map((link) => (
-            <a
-              key={link.id}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`
-                p-2 rounded-full transition-all duration-300 ease-out 
-                border border-transparent text-slate-400 dark:text-slate-500
-                hover:-translate-y-1 
-                ${link.hover}
-              `}
-            >
-              {link.icon}
-            </a>
-          ))}
+          {socialLinks.map((link) => {
+            return link.href === "" ? (
+              <button
+                key={link.id}
+                onClick={() => toast.info("Under construction.")}
+                className={`
+                  p-2 rounded-full transition-all duration-300 ease-out 
+                  border border-transparent text-slate-400 dark:text-slate-500
+                  hover:-translate-y-1 cursor-pointer
+                  ${link.hover}
+                `}
+              >
+                {link.icon}
+              </button>
+            ) : (
+              <a
+                key={link.id}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`
+                  p-2 rounded-full transition-all duration-300 ease-out 
+                  border border-transparent text-slate-400 dark:text-slate-500
+                  hover:-translate-y-1 cursor-pointer
+                  ${link.hover}
+                `}
+              >
+                {link.icon}
+              </a>
+            )
+          })}
         </div>
 
       </div>
