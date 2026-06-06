@@ -55,11 +55,11 @@ export const UserContext = ({ children }) => {
         `Changes saved successfully.`
         setShowActions(false);
       },
-      error: (err) => {
+      error: () => {
         setShowActions(false);
         seteditName(oldName);
         setdisplayName(oldName);
-        return err.message || 'Unable to save changes. Something went wrong.';
+        return 'Unable to save changes. Something went wrong.';
       },
     });
 

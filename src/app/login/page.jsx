@@ -10,20 +10,19 @@ import { useAuth } from "@/contexts/AuthContext";
 import { auth, db } from "@/lib/firebase";
 import { setCookie } from "cookies-next";
 import { useData } from "@/contexts/UserContext";
+import { useForm } from "@/contexts/FormsContext";
 
 const page = () => {
 
   const router = useRouter();
 
   const [Loading, setLoading] = useState(false);
-  const {
-    Data,
-    dispatch,
-    setCurrentUser
-  } = useAuth()
-  const { seteditName, setdisplayName } = useData()
 
-  async function checkData() {
+  const { setCurrentUser } = useAuth()
+  const { seteditName, setdisplayName } = useData()
+  const { Data, dispatch } = useForm()
+
+  async function logIn() {
     const emailValue = Data.email?.trim();
     const passwordValue = Data.password?.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -44,26 +43,63 @@ const page = () => {
       );
       const user = userCredential.user;
 
+      if (!user.emailVerified) {
+        toast.error("Please verify your email first.");
+        router.push("/verify-email")
+        return
+      }
+
       const userDoc = await getDoc(doc(db, "users", user.uid));
 
       if (userDoc.exists()) {
         const userData = userDoc.data();
         setCurrentUser({ ...user, ...userData });
+
         if (userData.user) {
           setdisplayName(userData.user);
           seteditName(userData.user);
         }
       }
+
       dispatch({ type: "email", val: "" });
       dispatch({ type: "password", val: "" });
-      setCookie("auth_token", { maxAge: 60 * 60 * 24 * 7, path: "/" });
 
-      router.replace("/")
+      const token = await user.getIdToken()
+
+      setCookie("firebase_token", token, {
+        maxAge: 60 * 60 * 24 * 7,
+        path: "/",
+        secure: true,
+        sameSite: "lax",
+      });
+
+      setTimeout(() => router.replace("/"), 100)
     } catch (error) {
-      if (error.code === "auth/wrong-password") {
-        toast.error("كلمة المرور غلط");
-      } else {
-        toast.error(error.message);
+      switch (error.code) {
+        case "auth/invalid-credential":
+          toast.error("Incorrect email or password. Please try again.");
+          break;
+        case "auth/wrong-password":
+          toast.error("Incorrect password.");
+          break;
+        case "auth/user-not-found":
+          toast.error("No account found with this email address.");
+          break;
+        case "auth/user-disabled":
+          toast.error("This account has been disabled by the administrator. Please contact support.");
+          break;
+        case "auth/too-many-requests":
+          toast.error("Too many failed login attempts. Access to this account has been temporarily blocked. Please try again later.");
+          break;
+        case "auth/network-request-failed":
+          toast.error("Network connection failure. Please check your internet connection.");
+          break;
+        case "auth/invalid-email":
+          toast.error("The email address provided is badly formatted.");
+          break;
+        default:
+          toast.error("An unexpected error occurred during login. Please try again.");
+          break;
       }
     } finally {
       setLoading(false);
@@ -123,7 +159,7 @@ const page = () => {
              focus:border-none
              transition-colors duration-400"
                   minLength={8}
-                  maxLength={8}
+                  maxLength={30}
                   placeholder="password..."
                   value={Data.password}
                   autoComplete="new-password"
@@ -158,7 +194,7 @@ const page = () => {
               <button
                 disabled={Loading}
                 className="p-2 mt-2.5 flex justify-center w-full rounded-lg bg-[#3b82f6] text-white text-[15px] font-bold cursor-pointer duration-200 hover:bg-[#2563eb]"
-                onClick={checkData}
+                onClick={logIn}
               >
                 {Loading ? (
                   <>
@@ -175,7 +211,7 @@ const page = () => {
           <p className="text-[15px] font-semibold text-gray-600">
             You Dont Have Acount{" "}
             <Link
-              href="/logup"
+              href="/signup"
               className="text-blue-500 hover:text-blue-600 underline"
             >
               Register!

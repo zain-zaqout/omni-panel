@@ -13,8 +13,7 @@ const EditProductModel = ({ isOpen, onClose }) => {
 
   const { setProductData, productData, setProducts, products } = useProduct();
   const { currentUser } = useAuth();
-  
-  // تأثير لتعطيل السكرول في الخلفية عندما يكون الموديل مفتوحاً
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -22,7 +21,6 @@ const EditProductModel = ({ isOpen, onClose }) => {
       document.body.style.overflow = "unset";
     }
 
-    // تنظيف التأثير عند عمل unmount للمكون لضمان عدم تعليق السكرول
     return () => {
       document.body.style.overflow = "unset";
     };
@@ -35,7 +33,7 @@ const EditProductModel = ({ isOpen, onClose }) => {
   }, [productData]);
 
   if (!isOpen) return null;
-  
+
   const handle = (e) => {
     const { name, value, type } = e.target;
 
@@ -62,8 +60,8 @@ const EditProductModel = ({ isOpen, onClose }) => {
     const formData = new FormData();
     formData.append("image", file);
 
-    const apiKey = "64b38851a39d1412ca74f19205722e5f"; 
-    
+    const apiKey = "64b38851a39d1412ca74f19205722e5f";
+
     const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
       method: "POST",
       body: formData,
@@ -76,7 +74,7 @@ const EditProductModel = ({ isOpen, onClose }) => {
 
     const result = await response.json();
     const uploadedUrl = result.data?.url || result.data?.display_url;
-    
+
     if (!uploadedUrl) {
       throw new Error("Invalid response structure from ImgBB.");
     }
@@ -94,7 +92,7 @@ const EditProductModel = ({ isOpen, onClose }) => {
         let finalImageUrl = productData.image;
 
         if (imageFile) {
-          finalImageUrl = await uploadToImgBB(imageFile); 
+          finalImageUrl = await uploadToImgBB(imageFile);
         }
 
         if (!finalImageUrl || finalImageUrl.startsWith("blob:")) {
@@ -149,7 +147,6 @@ const EditProductModel = ({ isOpen, onClose }) => {
 
         return "Product updated successfully!";
       } catch (error) {
-        console.error("Submission flow failed:", error.message);
         throw new Error(error.message);
       }
     };
@@ -189,7 +186,7 @@ const EditProductModel = ({ isOpen, onClose }) => {
               />
             </button>
           </div>
-          
+
           <div className="flex-1 overflow-y-auto px-6 py-6 bg-slate-50 dark:bg-slate-900/50 transition-colors">
             <div className="space-y-6">
               <div>

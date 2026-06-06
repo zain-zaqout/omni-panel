@@ -18,6 +18,7 @@ import { auth } from "@/lib/firebase";
 import { useProduct } from "@/contexts/EditProductContext";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "sonner";
 
 const Aside = () => {
 
@@ -27,9 +28,9 @@ const Aside = () => {
   const pathName = usePathname();
   const { Menu, setMenu } = useMenu();
   const { setProducts } = useProduct()
-  const { setCurrentUser, setIsAuthReady } = useAuth()
+  const { setCurrentUser } = useAuth()
 
-  if (pathName === "/profile" || pathName === "/login" || pathName === "/logup") {
+  if (pathName === "/profile" || pathName === "/login" || pathName === "/signup" || pathName === "/verify-email") {
     return null;
   }
 
@@ -64,15 +65,18 @@ const Aside = () => {
   const logOut = async () => {
     setLoading(true)
     try {
+
+      await deleteCookie("firebase_token");
       await signOut(auth);
-      await deleteCookie("auth_token");
+
+      router.replace("/login");
 
       setProducts([]);
       setMenu(false)
       setCurrentUser(null)
       localStorage.clear();
 
-      router.replace("/login");
+      toast.success("Successfully logged out!");
     } catch (error) {
       toast.error("some thing went error!")
     } finally {

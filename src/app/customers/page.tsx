@@ -111,8 +111,8 @@ const CustomerPage = () => {
 
   const filteredCustomer = customer.filter((item) => {
     const matchesSearch =
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.location.toLowerCase().includes(searchTerm.toLowerCase());
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.location.toLowerCase().includes(searchTerm.toLowerCase());
 
     const stock_customer = {
       "All": true,
@@ -124,22 +124,6 @@ const CustomerPage = () => {
 
     return matchesSearch && stock_customer[stockFilter];
   });
-
-  // const deletOrder = (id) => {
-  //   const filter = customer.filter((i) => i.id !== id);
-    
-  //   const promise = new Promise((resolve) => setTimeout(resolve, 2500));
-
-  // toast.promise(promise, {
-  //   loading: 'Loading',
-  //   success: () => {
-  //     setCustomer(filter)
-  //     localStorage.setItem("customer", JSON.stringify(filter))
-  //     return `Success In Add Product`;
-  //   },
-  //   error: 'عذراً، حدث خطأ أثناء التحديث',
-  //   });
-  // }
 
   return (
     <main className="bg-slate-50 dark:bg-slate-900 min-h-screen ml-0 min-[376px]:ml-15 lg:ml-55 transition-colors duration-300">

@@ -12,20 +12,17 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useAuth } from "@/contexts/AuthContext";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
 import { useProduct } from "@/contexts/EditProductContext";
-import { setCookie } from "cookies-next";
-import { useData } from "@/contexts/UserContext";
+import { useForm } from "@/contexts/FormsContext";
 
 const Page = () => {
   const router = useRouter();
 
   const [Loading, setLoading] = useState(false);
-  const { Data, dispatch, isAuthReady, setIsAuthReady, currentUser, setCurrentUser } = useAuth();
+  const { Data, dispatch } = useForm()
   const { setProducts } = useProduct();
-  const { seteditName, setdisplayName } = useData()
 
   const checkData = async () => {
     const passwordValue = Data.password?.trim();
@@ -45,10 +42,6 @@ const Page = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("/productsUser.json");
-      const data = await res.json();
-      setProducts(data);
-
       const userSnapshot = await getDocs(query(
         collection(db, "users"),
         where("user", "==", userValue),
@@ -61,32 +54,52 @@ const Page = () => {
       }
 
       const userCredential = await createUserWithEmailAndPassword(auth, emailValue, passwordValue);
+
+      const res = await fetch("/productsUser.json");
+      const data = await res.json();
+      setProducts(data);
+
       const user = userCredential.user;
       const userData = {
         user: userValue,
         email: emailValue.toLowerCase(),
-        phoneNumber: "",
+        phoneNumber: "+1 (555) 1234",
         productsUser: data,
       };
 
       await setDoc(doc(db, "users", user.uid), userData);
-      setCurrentUser({ ...user, ...userData });
-      setdisplayName(userValue);
-      seteditName(userValue);
-      toast.success("Account created successfully");
-      setCookie("auth_token", { maxAge: 60 * 60 * 24 * 7, path: "/" });
-      router.replace("/");
+      await sendEmailVerification(user)
+      toast.success("Verification email sent! Check your inbox at " + user.email)
 
       dispatch({ type: "user", val: "" });
       dispatch({ type: "email", val: "" });
       dispatch({ type: "password", val: "" });
+
+      router.push("/verify-email");
+
     } catch (error) {
-      if (error?.code === "auth/email-already-in-use") {
-        toast.error("This email is already in use");
-      } else if (error?.code === "auth/weak-password") {
-        toast.error("Password is too weak");
-      } else {
-        toast.error(error?.message || "An error occurred during registration");
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          toast.error("This email address is already registered. Try logging in instead.");
+          break;
+        case "auth/invalid-email":
+          toast.error("The email address provided is badly formatted.");
+          break;
+        case "auth/weak-password":
+          toast.error("The password is too weak. Please use a stronger password.");
+          break;
+        case "auth/operation-not-allowed":
+          toast.error("Email/Password accounts are not enabled. Please contact support.");
+          break;
+        case "auth/network-request-failed":
+          toast.error("Network connection failure. Please check your internet connection.");
+          break;
+        case "auth/too-many-requests":
+          toast.error("Too many requests. Please try again later.");
+          break;
+        default:
+          toast.error("An unexpected error occurred during sign up. Please try again.");
+          break;
       }
     } finally {
       setLoading(false);
@@ -134,7 +147,7 @@ const Page = () => {
                 required
                 placeholder="Password..."
                 minLength={8}
-                maxLength={8}
+                maxLength={30}
                 value={Data?.password}
                 autoComplete="new-password"
                 onChange={(e) => dispatch({ type: "password", val: e.target.value })}

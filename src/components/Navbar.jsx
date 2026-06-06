@@ -15,9 +15,9 @@ const Navbar = () => {
   const [mounted, setMounted] = useState(false);
 
   const name = displayName.toLowerCase();
-  const sayHello = displayName === "User" ? 
-  <span className="h-2 w-7 inline-block bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
-  : displayName.toLowerCase().split(" ")[0];
+  const sayHello = displayName === "User" ?
+    <span className="h-2 w-7 inline-block bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
+    : displayName.toLowerCase().split(" ")[0];
 
   useEffect(() => {
     setMounted(true);
@@ -27,7 +27,7 @@ const Navbar = () => {
 
   const isDark = mounted && resolvedTheme === "dark";
 
-  if (pathName === "/profile" || pathName === "/login" || pathName === "/logup") {
+  if (pathName === "/profile" || pathName === "/login" || pathName === "/signup" || pathName === "/verify-email") {
     return null;
   }
 

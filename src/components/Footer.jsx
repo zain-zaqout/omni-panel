@@ -34,7 +34,7 @@ const Footer = () => {
 
   const path = usePathname()
   const isProfilePage = path === "/profile"
-  const isloggedPage = path === "/login" || path === "/logup"
+  const isloggedPage = path === "/login" || path === "/signup"
 
   return (
     <footer className={`

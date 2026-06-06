@@ -21,7 +21,6 @@ export const AddProducttModel = ({ isOpen, onClose }) => {
   const { setProducts } = useProduct();
   const { currentUser } = useAuth();
 
-  // تأثير لتعطيل السكرول في الخلفية عندما يكون موديل الإضافة مفتوحاً
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -29,7 +28,6 @@ export const AddProducttModel = ({ isOpen, onClose }) => {
       document.body.style.overflow = "unset";
     }
 
-    // تنظيف التأثير عند عمل unmount للمكون
     return () => {
       document.body.style.overflow = "unset";
     };
@@ -63,8 +61,8 @@ export const AddProducttModel = ({ isOpen, onClose }) => {
     const formData = new FormData();
     formData.append("image", file);
 
-    const apiKey = "64b38851a39d1412ca74f19205722e5f"; 
-    
+    const apiKey = "64b38851a39d1412ca74f19205722e5f";
+
     const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
       method: "POST",
       body: formData,
@@ -77,7 +75,7 @@ export const AddProducttModel = ({ isOpen, onClose }) => {
 
     const result = await response.json();
     const uploadedUrl = result.data?.url || result.data?.display_url;
-    
+
     if (!uploadedUrl) {
       throw new Error("Invalid response structure from ImgBB.");
     }
@@ -103,7 +101,7 @@ export const AddProducttModel = ({ isOpen, onClose }) => {
         if (!currentUser?.uid) throw new Error("User is not authenticated.");
         if (!imageFile) throw new Error("Please select an image first.");
 
-        const finalImageUrl = await uploadToImgBB(imageFile); 
+        const finalImageUrl = await uploadToImgBB(imageFile);
 
         if (!finalImageUrl || finalImageUrl.startsWith("blob:")) {
           throw new Error("Failed to secure a permanent image URL. Try uploading the image again.");
@@ -121,14 +119,13 @@ export const AddProducttModel = ({ isOpen, onClose }) => {
         };
 
         const userDocRef = doc(db, "users", currentUser.uid);
-        
+
         setProducts((prevProducts) => {
           const updated = [newProduct, ...prevProducts];
-          
+
           updateDoc(userDocRef, { productsUser: updated }).catch((err) => {
-            console.error("Firestore Error:", err);
           });
-          
+
           return updated;
         });
 
@@ -141,7 +138,6 @@ export const AddProducttModel = ({ isOpen, onClose }) => {
 
         return "Product added successfully!";
       } catch (error) {
-        console.error("Submission flow failed:", error.message);
         throw new Error(error.message);
       }
     };
@@ -171,7 +167,7 @@ export const AddProducttModel = ({ isOpen, onClose }) => {
               <X size={20} />
             </button>
           </div>
-          
+
           <div className="flex-1 overflow-y-auto px-6 py-6 bg-slate-50 dark:bg-slate-900/50">
             <div className="space-y-6">
               <div>

@@ -22,16 +22,16 @@ An e-commerce admin dashboard built with Next.js (App Router), featuring modern 
 
 ## ✨ المميزات | Features
 
-| الميزة                           | Description                                                              |
-| :------------------------------- | :----------------------------------------------------------------------- |
-| 📊 **لوحة نظرة عامة**            | Overview dashboard with KPI cards and charts.                            |
-| 📈 **تحليلات تفصيلية**           | Detailed analytics powered by `ApexCharts`.                              |
-| 📦 **إدارة الطلبات**             | Orders management with search, filters, and payment status.              |
-| 🔥 **إدارة المنتجات (Firebase)** | Products management (add/edit/delete) synced with Firebase Firestore.    |
-| 👥 **إدارة العملاء**             | Customers management with cards, tables, and filters.                    |
-| 👤 **الملف الشخصي المتزامن**     | Profile page with editable user details and security saved via Firebase. |
-| 🔐 **تسجيل دخول تجريبي**         | Demo login using `auth_token` cookie protected by `middleware`.          |
-| 🎨 **دعم الثيمات والحركة**       | Theme support via `next-themes` and motion via `framer-motion`.          |
+| الميزة                           | Description                                                                                                                                         |
+| :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 📊 **لوحة نظرة عامة**            | Overview dashboard with KPI cards and charts.                                                                                                       |
+| 📈 **تحليلات تفصيلية**           | Detailed analytics powered by `ApexCharts`.                                                                                                         |
+| 📦 **إدارة الطلبات**             | Orders management with search, filters, and payment status.                                                                                         |
+| 🔥 **إدارة المنتجات (Firebase)** | Products management (add/edit/delete) synced with Firebase Firestore.                                                                               |
+| 👥 **إدارة العملاء**             | Customers management with cards, tables, and filters.                                                                                               |
+| 👤 **الملف الشخصي المتزامن**     | Profile page with editable user details and security saved via Firebase.                                                                            |
+| 🔐 **مكافحة الحسابات الوهمية**   | Advanced email fraud prevention forcing real-identity verification, with secure route protection via firebase_token cookies and Next.js middleware. |
+| 🎨 **دعم الثيمات والحركة**       | Theme support via `next-themes` and motion via `framer-motion`.                                                                                     |
 
 ---
 
@@ -83,7 +83,9 @@ src/
 │   ├── /products      # Products Management (CRUD)
 │   ├── /customers     # Customers Management & Filters
 │   ├── /profile       # User Profile & Settings
-│   └── /login         # Demo Authentication
+│   ├── /login         # Secure Firebase Authentication (Sign In)
+│   ├── /signup        # New Account Creation & Credentials Registry
+│   └── /verify-email  # Anti-Fake Email Gateway & Token Refresh Junction
 ├── components/        # Reusable UI Components (Cards, Tables, Charts, Navigation)
 └── contexts/          # State Management & Seed Data
 ```

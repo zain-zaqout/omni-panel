@@ -61,9 +61,9 @@ export const EditProductContext = ({ children }) => {
         const res = await getDoc((doc(db, "users", currentUser.uid)));
         const data = res.data();
         setProducts(data?.productsUser || []);
-      } catch (error) {
-        toast.error("Failed to fetch products: " + error.message);
-      }finally{
+      } catch {
+        toast.error("Failed to fetch products");
+      } finally {
         setisLoading(false)
       }
     };

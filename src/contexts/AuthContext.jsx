@@ -3,7 +3,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import {
   createContext,
   useContext,
-  useReducer,
   useState,
   useEffect,
 } from "react";
@@ -15,30 +14,6 @@ export const Context = createContext();
 export const AuthContext = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isAuthReady, setIsAuthReady] = useState(false);
-
-  const initialState = {
-    user: "",
-    email: "",
-    password: "",
-    phone: ""
-  };
-
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case "user":
-        return { ...state, user: action.val };
-      case "email":
-        return { ...state, email: action.val };
-      case "password":
-        return { ...state, password: action.val };
-      case "phone":
-        return { ...state, phone: action.val };
-      default:
-        return state;
-    }
-  };
-
-  const [Data, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const unsubsctibe = onAuthStateChanged(auth, async (user) => {
@@ -61,8 +36,6 @@ export const AuthContext = ({ children }) => {
     <>
       <Context.Provider
         value={{
-          Data,
-          dispatch,
           currentUser,
           setCurrentUser,
           setIsAuthReady,
