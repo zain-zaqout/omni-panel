@@ -16,20 +16,21 @@ export const AuthContext = ({ children }) => {
   const [isAuthReady, setIsAuthReady] = useState(false);
 
   useEffect(() => {
-    const unsubsctibe = onAuthStateChanged(auth, async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         const userDoc = await getDoc(doc(db, "users", user.uid));
         if (userDoc.exists()) {
-          const userData = userDoc.data();
-
-          setCurrentUser({ ...user, ...userData });
+          setCurrentUser({ ...user, ...userDoc.data() });
         } else {
           setCurrentUser(null);
         }
+      } else {
+        setCurrentUser(null);
       }
+      setIsAuthReady(true);
     });
-    setIsAuthReady(true);
-    return () => unsubsctibe();
+
+    return () => unsubscribe();
   }, []);
 
   return (
