@@ -85,6 +85,7 @@ src/
 │   ├── /profile       # User Profile & Settings
 │   ├── /login         # Secure Firebase Authentication (Sign In)
 │   ├── /signup        # New Account Creation & Credentials Registry
+│   ├── /forgot-password      # Secure Credential Recovery & Reset Link Dispatcher
 │   └── /verify-email  # Anti-Fake Email Gateway & Token Refresh Junction
 ├── components/        # Reusable UI Components (Cards, Tables, Charts, Navigation)
 └── contexts/          # State Management & Seed Data

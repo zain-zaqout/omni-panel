@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "User Directory",
+  title: "Customers",
 };
 
 export default function CustomerLayout({ children }) {

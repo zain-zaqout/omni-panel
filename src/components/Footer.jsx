@@ -36,6 +36,10 @@ const Footer = () => {
   const isProfilePage = path === "/profile"
   const isloggedPage = path === "/login" || path === "/signup"
 
+  if (path === "/verify-email" || path === "/forgot-password") {
+    return null
+  }
+
   return (
     <footer className={`
       h-16 flex items-center transition-all duration-300

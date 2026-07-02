@@ -52,7 +52,7 @@ export const EditProductContext = ({ children }) => {
   };
 
   useEffect(() => {
-    if (!currentUser) return;
+    if (!currentUser?.emailVerified) return;
 
     const getProducts = async () => {
       setisLoading(true)

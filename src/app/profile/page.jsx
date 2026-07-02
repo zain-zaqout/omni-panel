@@ -6,12 +6,18 @@ import Preferences from "@/components/Preferences";
 import PersonalDetails from "@/components/PersonalDetails";
 import { useRouter } from "next/navigation";
 import { useData } from "@/contexts/UserContext";
+import { useAuth } from "@/contexts/AuthContext";
 import Image from "next/image";
 
 const Page = () => {
   const router = useRouter();
   const { displayName, showActions, setShowActions, seteditName, changeData } =
     useData();
+  const { currentUser } = useAuth();
+
+  const joinedDate = currentUser?.createdAt
+    ? new Date(currentUser.createdAt).toLocaleDateString("en-US", { month: "short", year: "numeric" }).replace(" ", ", ")
+    : "N/A";
 
   return (
     <div className="bg-slate-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
@@ -68,7 +74,7 @@ const Page = () => {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
-                  <span>Joined Mar, 2026</span>
+                  <span>Joined {joinedDate}</span>
                 </div>
               </div>
             </div>

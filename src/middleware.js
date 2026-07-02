@@ -4,7 +4,12 @@ export function middleware(request) {
   const token = request.cookies.get("firebase_token")?.value;
   const { pathname } = request.nextUrl;
 
-  const publicPaths = ["/login", "/signup", "/verify-email"];
+  const publicPaths = [
+    "/login",
+    "/signup",
+    "/verify-email",
+    "/forgot-password",
+  ];
   const isPublicPath = publicPaths.includes(pathname);
 
   if (!token && !isPublicPath) {

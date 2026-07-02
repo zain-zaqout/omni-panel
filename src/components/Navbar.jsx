@@ -27,14 +27,16 @@ const Navbar = () => {
 
   const isDark = mounted && resolvedTheme === "dark";
 
-  if (pathName === "/profile" || pathName === "/login" || pathName === "/signup" || pathName === "/verify-email") {
+  if (pathName === "/profile" || pathName === "/login" || pathName === "/signup" || pathName === "/verify-email" || pathName === "/forgot-password") {
     return null;
   }
 
   const getTitle = () => {
     if (pathName === "/") return "Overview";
+
     const title = pathName.split("/")[1];
-    return title.charAt(0).toUpperCase() + title.slice();
+
+    return title.charAt(0).toUpperCase() + title.slice(1);
   };
 
   return (

@@ -10,9 +10,8 @@ import { Toaster } from "sonner";
 import { EditProductContext } from "@/contexts/EditProductContext";
 import { MenuContext } from "@/contexts/MenuContext";
 import { AuthContext } from "@/contexts/AuthContext";
-import { FormsContext } from "@/contexts/FormsContext";
 
-export const metadat = {
+export const metadata = {
   title: {
     default: "Overview | Control Panel",
     template: "%s | Omni Panel",
@@ -37,31 +36,29 @@ export default function RootLayout({
           enableSystem={false}
         >
           <AuthContext>
-            <FormsContext>
 
-              <MenuContext>
-                <OrderContext>
-                  <UserContext>
-                    <EditProductContext>
-                      <Toaster position="top-center" richColors />
-                      <div className="flex flex-col min-h-screen">
-                        <Navbar />
-                        <div className="flex flex-1">
-                          <Aside />
-                          <main className="flex-1 w-full transition-all duration-300">
-                            {children}
-                          </main>
-                        </div>
-                        <Footer />
+            <MenuContext>
+              <OrderContext>
+                <UserContext>
+                  <EditProductContext>
+                    <Toaster position="top-center" richColors />
+                    <div className="flex flex-col min-h-screen">
+                      <Navbar />
+                      <div className="flex flex-1">
+                        <Aside />
+                        <main className="flex-1 w-full transition-all duration-300">
+                          {children}
+                        </main>
                       </div>
-                    </EditProductContext>
-                  </UserContext>
-                </OrderContext>
-              </MenuContext>
-            </FormsContext>
+                      <Footer />
+                    </div>
+                  </EditProductContext>
+                </UserContext>
+              </OrderContext>
+            </MenuContext>
           </AuthContext>
         </ThemeProvider>
       </body>
-    </html>
+    </html >
   );
 }

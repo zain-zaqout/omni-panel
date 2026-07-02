@@ -20,11 +20,10 @@ import { useData } from "@/contexts/UserContext";
 
 const OverviewSection = () => {
   const { displayName } = useData();
-  const sayHello = displayName === "User" ? 
-  <span className="h-2.5 w-8.5 inline-block bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
-  : displayName.toLowerCase().split(" ")[0];
+  const sayHello = displayName === "User" ?
+    <span className="h-2.5 w-8.5 inline-block bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
+    : displayName.toLowerCase().split(" ")[0];
 
-  
   const cards = [
     {
       id: 1,
@@ -58,7 +57,7 @@ const OverviewSection = () => {
       value: 1492,
       background: "bg-blue-50 dark:bg-blue-500/10",
       hover:
-      "hover:border-blue-200 dark:hover:border-blue-500/50 hover:shadow-md",
+        "hover:border-blue-200 dark:hover:border-blue-500/50 hover:shadow-md",
       icon: (
         <ShoppingCart className="text-blue-600 dark:text-blue-400" size={20} />
       ),
@@ -72,7 +71,7 @@ const OverviewSection = () => {
       value: 4,
       background: "bg-orange-50 dark:bg-orange-500/10",
       hover:
-      "hover:border-orange-200 dark:hover:border-orange-500/50 hover:shadow-md",
+        "hover:border-orange-200 dark:hover:border-orange-500/50 hover:shadow-md",
       icon: (
         <Percent className="text-orange-600 dark:text-orange-400" size={20} />
       ),
@@ -81,7 +80,7 @@ const OverviewSection = () => {
       unit: "%",
     },
   ];
-  
+
   const { orders } = useOrders();
 
   return (
@@ -141,11 +140,10 @@ const OverviewSection = () => {
                 </div>
                 <div className="inline-flex justify-between items-center w-full pt-4">
                   <div
-                    className={`flex items-center gap-1 w-fit px-2 py-1 rounded-lg ${
-                      item.row === "up"
+                    className={`flex items-center gap-1 w-fit px-2 py-1 rounded-lg ${item.row === "up"
                         ? "bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400"
                         : "bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400"
-                    }`}
+                      }`}
                   >
                     {item.row === "up" ? (
                       <TrendingUp size={14} />

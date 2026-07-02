@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "Signup",
+    title: "Signup",
 };
 
 export default function SignupLayout({ children }) {
-  return <>{children}</>;
+    return <>{children}</>;
 }

@@ -8,8 +8,8 @@ import { useAuth } from "./AuthContext";
 export const UserContextInstance = createContext();
 
 export const UserContext = ({ children }) => {
-  const [displayName, setdisplayName] = useState("Loading User...");
-  const [editName, seteditName] = useState("Loading User...");
+  const [displayName, setdisplayName] = useState("User");
+  const [editName, seteditName] = useState("User");
   const [showActions, setShowActions] = useState(false);
 
   const { currentUser, setCurrentUser } = useAuth();
