@@ -209,6 +209,7 @@ const SigninForm = () => {
                                 type="text"
                                 placeholder='Full name'
                                 className="h-11 w-full rounded-xl mt-1.5 border pl-10 pr-4 font-semibold shadow-[0_0_10px_rgba(139,92,246,0.15)] text-sm transition-all duration-200 outline-none border-slate-200 bg-white text-slate-800 focus:border-violet-500 focus:bg-white focus:shadow-[0_0_0_4px_rgba(139,92,246,0.1)]"
+                                disabled={Loading || LoadingGoogle}
                                 maxLength={17}
                                 autoComplete="one-time-code"
                                 ref={inputFocus}
@@ -225,6 +226,7 @@ const SigninForm = () => {
                                 type="email"
                                 placeholder='your@example.com'
                                 className="h-11 w-full rounded-xl mt-1.5 border pl-10 pr-4 font-semibold shadow-[0_0_10px_rgba(139,92,246,0.15)] text-sm transition-all duration-200 outline-none border-slate-200 bg-white text-slate-800 focus:border-violet-500 focus:bg-white focus:shadow-[0_0_0_4px_rgba(139,92,246,0.1)]"
+                                disabled={Loading || LoadingGoogle}
                                 autoComplete="one-time-code"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -240,6 +242,7 @@ const SigninForm = () => {
                                 placeholder='Create a strong password'
                                 className="h-11 w-full rounded-xl mt-1.5 border pl-10 pr-4 font-semibold shadow-[0_0_10px_rgba(139,92,246,0.15)] text-sm transition-all duration-200 outline-none border-slate-200 bg-white text-slate-800 focus:border-violet-500 focus:bg-white focus:shadow-[0_0_0_4px_rgba(139,92,246,0.1)]"
                                 maxLength={30}
+                                disabled={Loading || LoadingGoogle}
                                 autoComplete="new-password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}

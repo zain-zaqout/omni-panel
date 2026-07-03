@@ -213,6 +213,7 @@ const SigninForm = () => {
                                 type="email"
                                 placeholder='your@example.com'
                                 className="h-11 w-full rounded-xl mt-1.5 border pl-10 pr-4 font-semibold shadow-[0_0_10px_rgba(139,92,246,0.15)] text-sm transition-all duration-200 outline-none border-slate-200 bg-white text-slate-800 focus:border-violet-500 focus:bg-white focus:shadow-[0_0_0_4px_rgba(139,92,246,0.1)]"
+                                disabled={Loading || LoadingGoogle}
                                 autoComplete="one-time-code"
                                 ref={inputFocus}
                                 value={email}
@@ -228,6 +229,7 @@ const SigninForm = () => {
                                 type="password"
                                 placeholder='Create a strong password'
                                 className="h-11 w-full rounded-xl mt-1.5 border pl-10 pr-4 font-semibold shadow-[0_0_10px_rgba(139,92,246,0.15)] text-sm transition-all duration-200 outline-none border-slate-200 bg-white text-slate-800 focus:border-violet-500 focus:bg-white focus:shadow-[0_0_0_4px_rgba(139,92,246,0.1)]"
+                                disabled={Loading || LoadingGoogle}
                                 maxLength={30}
                                 autoComplete="new-password"
                                 value={password}
