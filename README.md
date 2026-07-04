@@ -19,6 +19,15 @@ An e-commerce admin dashboard built with Next.js (App Router), featuring modern 
 **👉 [Omni Panel - Live Demo](https://omni-panel-alpha.vercel.app)**
 
 ---
+## 📸 Interface Preview
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/c4412379-eba9-4e97-a453-6aaa45429d47" alt="Omni Panel Dark Overview" width="100%" />
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/9d324eca-14d7-44f7-affc-5cf373290eaf" alt="Omni Panel Authentication" width="49%" />
+  <img src="https://github.com/user-attachments/assets/11ab1a25-f61e-4db2-9efb-1e4e10a5e6a3" alt="Omni Panel Analytics Light" width="49%" />
+</p>
 
 ## ✨ المميزات | Features
 
