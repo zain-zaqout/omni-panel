@@ -163,7 +163,7 @@ const Page = () => {
     }
 
     return (
-        <div className='min-h-screen flex items-center justify-center px-4'>
+        <div className='min-h-screen flex items-center justify-center px-4 bg-white dark:bg-white'>
 
             <div className="fixed top-0 left-0 mx-10 flex items-center py-5">
                 <button

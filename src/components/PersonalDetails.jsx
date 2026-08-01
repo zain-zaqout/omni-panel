@@ -1,6 +1,7 @@
 import { IdCard, Mail, Phone, User } from "lucide-react";
 import { useData } from "@/contexts/UserContext";
 import { useRef, useEffect } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const PersonalDetails = () => {
   const {
@@ -9,6 +10,7 @@ const PersonalDetails = () => {
     seteditName,
     showActions
   } = useData();
+  const { currentUser } = useAuth()
 
   const inputFocusRef = useRef(null);
 
@@ -64,7 +66,7 @@ const PersonalDetails = () => {
                 type="email"
                 id="email"
                 className="h-11 w-full rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 pl-10 pr-4 text-sm text-slate-500 dark:text-slate-400 outline-none cursor-not-allowed"
-                value={email}
+                value={currentUser.email}
                 readOnly
               />
             </div>

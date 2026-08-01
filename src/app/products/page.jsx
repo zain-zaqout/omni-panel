@@ -13,8 +13,6 @@ const Products = () => {
   const [stockFilter, setstockFilter] = useState("All");
   const [searchTerm, setsearchTerm] = useState("");
 
-  const [imageFile, setImageFile] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
   const Filter = ["All", "In Stock", "Low Stock", "Out of Stock"];
 
   const { products } = useProduct();
@@ -128,9 +126,6 @@ const Products = () => {
 
       <AddProducttModel
         isOpen={isModelOpen}
-        setImagePreview={setImagePreview}
-        setImageFile={setImageFile}
-        imagePreview={imagePreview}
         onClose={() => setIsModelOpen(false)}
       />
     </main>

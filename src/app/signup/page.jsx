@@ -4,7 +4,7 @@ import AuthBanner from "@/components/AuthBanner";
 const Page = () => {
 
     return (
-        <div className='grid grid-cols-2 max-[1000px]:grid-cols-1 w-full'>
+        <div className='grid grid-cols-2 bg-white dark:bg-white max-[1000px]:grid-cols-1 w-full'>
             <AuthBanner />
             <SignupForm />
         </div>
