@@ -33,7 +33,6 @@ export const AddProducttModel = ({ isOpen, onClose }) => {
     };
   }, [isOpen]);
 
-  if (!isOpen) return null;
 
   const handle = (e) => {
     const { name, value, type } = e.target;
@@ -150,9 +149,14 @@ export const AddProducttModel = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end">
-      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-md bg-white dark:bg-slate-900 shadow-2xl flex flex-col h-full right-0 border-l border-slate-200 dark:border-slate-800 transition-colors animate-[slideIn_0.3s_ease-out]">
+    <>
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity"
+          onClick={onClose}
+        />
+      )}
+      <div className={`fixed top-0 right-0 z-50 h-full w-full max-w-md bg-white shadow-xl overflow-hidden transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
         <form onSubmit={handleSubmit} className="flex flex-col h-full">
           <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-6 py-5 bg-white dark:bg-slate-900">
             <div>
@@ -247,17 +251,6 @@ export const AddProducttModel = ({ isOpen, onClose }) => {
           </div>
         </form>
       </div>
-
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        @keyframes slideIn {
-          from { transform: translateX(100%); }
-          to { transform: translateX(0); }
-        }
-      `,
-        }}
-      />
-    </div>
+    </>
   );
 };

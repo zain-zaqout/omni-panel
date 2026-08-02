@@ -32,7 +32,6 @@ const EditProductModel = ({ isOpen, onClose }) => {
     }
   }, [productData]);
 
-  if (!isOpen) return null;
 
   const handle = (e) => {
     const { name, value, type } = e.target;
@@ -159,12 +158,14 @@ const EditProductModel = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end">
-      <div
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
-        onClick={onClose}
-      />
-      <div className="relative w-full max-w-md bg-white dark:bg-slate-900 shadow-2xl flex flex-col h-full right-0 animate-[slideIn_0.3s_ease-out] border-l border-slate-200 dark:border-slate-800 transition-colors">
+    <>
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity"
+          onClick={onClose}
+        />
+      )}
+      <div className={`fixed top-0 right-0 z-50 h-full w-full max-w-md bg-white shadow-xl overflow-hidden transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
         <form onSubmit={handleSubmit} className="flex flex-col h-full">
           <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-6 py-5 bg-white dark:bg-slate-900 transition-colors">
             <div>
@@ -336,7 +337,11 @@ const EditProductModel = ({ isOpen, onClose }) => {
             <div className="flex gap-3">
               <button
                 type="button"
-                onClick={onClose}
+                onClick={() => {
+                  onClose()
+                  setImagePreview(productData?.image || null);
+                  setImageFile(null)
+                }}
                 className="flex-1 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white transition-colors shadow-sm"
               >
                 Cancel
@@ -351,18 +356,7 @@ const EditProductModel = ({ isOpen, onClose }) => {
           </div>
         </form>
       </div>
-
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        @keyframes slideIn {
-          from { transform: translateX(100%); }
-          to { transform: translateX(0); }
-        }
-      `,
-        }}
-      />
-    </div>
+    </>
   );
 };
 

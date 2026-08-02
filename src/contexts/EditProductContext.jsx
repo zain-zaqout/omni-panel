@@ -27,8 +27,6 @@ export const EditProductContext = ({ children }) => {
     const oldProducts = [...products];
     const filteredProducts = products.filter((item) => item.id !== id);
 
-    setProducts(filteredProducts);
-
     const deleteProcess = async () => {
       try {
         const userDocRef = doc(db, "users", currentUser.uid);
@@ -36,6 +34,8 @@ export const EditProductContext = ({ children }) => {
         await updateDoc(userDocRef, {
           productsUser: filteredProducts
         });
+
+        setProducts(filteredProducts);
 
         return "Product deleted successfully!";
       } catch (error) {
